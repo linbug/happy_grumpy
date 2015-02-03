@@ -7,6 +7,11 @@ class Face {
 void start(float xpos, float ypos){
 x = xpos;
 y = ypos;
+fill(255, 62, 210);
+  ellipse (x, y, faceSize, faceSize);
+  eye (x+20, y-20);
+  eye (x-20, y-20);
+  mouth (x, y);
 }
 
 void move(){

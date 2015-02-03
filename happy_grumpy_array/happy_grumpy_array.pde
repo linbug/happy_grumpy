@@ -1,7 +1,6 @@
 Face [] faces; //Face is the object, faces is the array
 int numFaces = 5;
 int currentFace = 0;
-int counter = 0;
 int r, g, b;
 boolean overFace = false;
 boolean faceLocked;
@@ -29,14 +28,15 @@ void setup () {
 
 void draw() {
 
-  counter ++;
+  
   make_background();
   make_Faces();
-  move_Faces();
+//  move_Faces();
   overFace = check_if_overFace();
+println(currentFace);
 
-  //println (overFace);
 }
+
 
 void make_background() {
   float colorMultiplier = 1 - (mouseX / (float)width);
@@ -44,37 +44,34 @@ void make_background() {
 }
 
 void make_Faces() { 
-  if (counter>300) {
-    counter= 0;
-  }
 
-  if (currentFace < numFaces-1) {
-    if (counter == 300) {
-      faces[currentFace].start(random(0, width), height*0.25);
-      currentFace+=1;
-    }
-  }
+//  if (currentFace < numFaces-1) {
+//    if (frameCount % 300 == 0) {
+      faces[currentFace].start(width/2, height*0.25);
+//      currentFace+=1;
+//      
+//    }
+//  }
 }
 
-void move_Faces() {
-  if (!faceLocked) {
-    for (int i = 0; i< numFaces; i++) {
-      faces[i].move();
-    }
-  } else {
-    println ("is locked");
-  }
-  
-}
-
+//void move_Faces() {
+//  if (!faceLocked) {
+//    for (int i = 0; i< numFaces; i++) {
+//      faces[i].move();
+//    }
+//  } else {
+//    println ("is locked");
+//  }
+//  
+//}
 
 
 boolean check_if_overFace() {
   boolean OF = false;
   for (int i = 0; i< faces.length; i+=1) {
     Face myFace = (Face)faces[i];
-    if 
-      (mouseX > myFace.x- (myFace.faceSize/2) 
+    if (
+      mouseX > myFace.x- (myFace.faceSize/2) 
       && mouseX < myFace.x + (myFace.faceSize/2) 
       && mouseY > myFace.y - (myFace.faceSize/2)
       && mouseY < myFace.y + (myFace.faceSize/2)) 
@@ -88,12 +85,8 @@ boolean check_if_overFace() {
 
 
 void mousePressed() {
-
   if (overFace) { 
-
     faceLocked = true; 
-
-    //fill(255, 255, 255);
   } else {
 
     faceLocked = false;
